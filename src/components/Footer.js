@@ -1,7 +1,7 @@
-export default function Footer({name, email, address, website}) {
+export default function Footer({ name, email, website, phone, bankAccount, bankName }) {
     return (
         <>
-            <footer>
+            <footer className="footer border-t2 border-gray-300 pt-5">
                 <ul className="flex flex-wrap items-center justify-center">
                     <li>
                         <span className="font-bold">Your name:</span>{name}
@@ -10,17 +10,22 @@ export default function Footer({name, email, address, website}) {
                         <span className="font-bold">Your email:</span>{email}
                     </li>
                     <li>
-                        <span className="font-bold">Phone Number:</span>0712 345 678
-                    </li>v
-                    <li>
-                        <span className="font-bold">Bank:</span> Bank Account
+                        <span className="font-bold">Phone Number:</span>{phone}
                     </li>
                     <li>
-                        <span className="font-bold">Account Number:</span> 123 456 789
+                        <span className="font-bold">Bank:</span>{bankName}
                     </li>
                     <li>
-                        <span className="font-bold">Website:</span> {" "} 
-                        <a href={website}>{website}</a>
+                        <span className="font-bold">Account holder:</span>{name}
+                    </li>
+                    <li>
+                        <span className="font-bold">Account Number:</span>{bankAccount}
+                    </li>
+                    <li>
+                        <span className="font-bold">Website:</span> {" "}
+                        <a href={website} targer="_blank" rel="noopenner noreferrer">
+                            {website}
+                        </a>
                     </li>
                 </ul>
             </footer>

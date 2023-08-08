@@ -27,11 +27,11 @@ function App() {
 
 
   const handlePrint = () => {
-    window.print()
+    window.print();
   }
   return (
     <>
-      <main className="m-5 p-5 xl:max-w-4xl xl:mx-auto bg-white rounded shadow">
+      <main className="m-5 p-5 md:max-w-xl md:mx-auto lg-max-w-2xl xl:max-w-4xl bg-white rounded shadow">
 
         {showInvoice ? (
           <div>
@@ -55,7 +55,7 @@ function App() {
             phone={phone}
             bankAccount={bankAccount}
             bankName={bankName}
-            
+
             />
             <button onClick={() => setShowInvoice(false)} className="mt-5 bg-blue-500 text-white 
             font-bold py-2 px-8 rounded shadow
@@ -78,7 +78,6 @@ function App() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-
 
               <label htmlFor="address">Enter your Address</label>
               <input
@@ -204,15 +203,15 @@ function App() {
               <label htmlFor="notes">Additional Notes</label>
               <textarea name="notes" id="notes" cols="30" rows="10" placeholder="Additional notes to the client"
               value={notes} onChange={(e) => setNotes(e.target.value)}></textarea>
-              <input
-                type="text"notes
+              {/* <input
+                type="text"
                 name="notes"
                 id="notes"
                 placeholder="Enter your notes"
                 autoComplete="off"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-              />
+              /> */}
 
               <button onClick={() => setShowInvoice(true)} 
                 className="bg-blue-500 text-white 
