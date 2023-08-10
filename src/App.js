@@ -30,8 +30,9 @@ function App() {
   const [price, setPrice] = useState("");
   const [amount, setAmount] = useState("");
   const [list, setList] = useState([]);
+  const [total, setTotal] = useState(0);
 
-//  to handel th priint the button
+  //  to handel th priint the button
   const handlePrint = () => {
     window.print();
   }
@@ -49,14 +50,16 @@ function App() {
 
             <Dates invoiceNumber={invoiceNumber} invoiceDate={invoiceDate} dueDate={dueDate} />
 
-            <Table 
-            description={description}
-            quantity={quantity}
-            price={price}
-            amount={amount}
-            list={list}
-            setList={setList}
-            
+            <Table
+              description={description}
+              quantity={quantity}
+              price={price}
+              amount={amount}
+              list={list}
+              setList={setList}
+              total={total}
+              setTotal={setTotal}
+
             />
 
             <Notes notes={notes} />
@@ -263,31 +266,33 @@ function App() {
               {/* Thi is our table form */}
 
               <article>
-                <TableForm 
-                description={description} 
-                setDescription={setDescription}
-                quantity={quantity}
-                setQuantity={setQuantity}
-                price={price}
-                setPrice={setPrice}
-                amount={amount}
-                setAmount={setAmount}
-                list={list}
-                setList={setList}
+                <TableForm
+                  description={description}
+                  setDescription={setDescription}
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                  price={price}
+                  setPrice={setPrice}
+                  amount={amount}
+                  setAmount={setAmount}
+                  list={list}
+                  setList={setList}
+                  total={total}
+                  setTotal={setTotal}
 
-                
+
                 />
               </article>
 
               <label htmlFor="notes">Additional Notes</label>
-              <textarea 
-              name="notes" 
-              id="notes" 
-              cols="30" 
-              rows="10" 
-              placeholder="Additional notes to the client"
-              value={notes} 
-              onChange={(e) => setNotes(e.target.value)}></textarea>
+              <textarea
+                name="notes"
+                id="notes"
+                cols="30"
+                rows="10"
+                placeholder="Additional notes to the client"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}></textarea>
 
               <button onClick={() => setShowInvoice(true)}
                 className="bg-blue-500 text-white 

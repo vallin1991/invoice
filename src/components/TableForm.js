@@ -1,10 +1,24 @@
-import React, { useEffect } from 'react';
-import { v4 as uuidv4 } from "uuid";
+import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai'
 
 
-export default function TableForm({ description, setDescription, quantity, setQuantity, price, setPrice, amount, setAmount, list, setList }) {
+export default function TableForm({
+    description,
+    setDescription,
+    quantity,
+    setQuantity,
+    price,
+    setPrice,
+    amount,
+    setAmount,
+    list,
+    setList,
+    total,
+    setTotal }) {
 
-    // adding a new item
+    const [isEditing, setIsEditing] = useState(false);
+    // adding a new item  submit form
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -19,15 +33,47 @@ export default function TableForm({ description, setDescription, quantity, setQu
         setQuantity("");
         setPrice("");
         setAmount("");
-        setList([...list, newItems])
+        setList([...list, newItems]);
+        setIsEditing(false);
         console.log(list);
     }
+
+    // Calculate items amount function
     useEffect(() => {
         const calculateAmount = (amount) => {
             setAmount(quantity * price);
         }
         calculateAmount(amount)
     }, [amount, price, quantity, setAmount])
+
+    //Calculate total amount of items in table
+
+    useEffect(() => {
+        let rows = document.querySelectorAll(".amount");
+        let sum = 0;
+
+        for (let i = 0; i < rows.length; i++) {
+            if (rows[i].className === "amount") {
+                sum += isNaN(rows[i].innerHTML) ? 0 : parseInt(rows[i].innerHTML);
+                setTotal(sum);
+            }
+        }
+    })
+
+    //Edit Button Function
+
+    const editRow = (id) => {
+        const editingRow = list.find((row) => row.id === id)
+        setList(list.filter((row) => row.id !== id));
+        setIsEditing(true);
+        setDescription(editingRow.description);
+        setQuantity(editingRow.quantity);
+        setPrice(editingRow.price);
+    }
+
+
+    //Delete Button Function
+    const deleteRow = (id) => setList(list.filter((row) => row.id !== id))
 
     return (
         <>
@@ -74,7 +120,11 @@ export default function TableForm({ description, setDescription, quantity, setQu
             border-2 border-blue-500 hover:bg-transparent 
             hover:text-blue-500 transition-all 
             duration-300
-            ">Add Table Item</button>
+            ">
+
+                    {isEditing ? "Editing Row Item" : "Add Table Item"}
+
+                </button>
 
             </form>
 
@@ -98,19 +148,26 @@ export default function TableForm({ description, setDescription, quantity, setQu
                                 <td>{description}</td>
                                 <td>{quantity}</td>
                                 <td>{price}</td>
-                                <td>{amount}</td>
+                                <td className="amount">{amount}</td>
+                                <td>
+                                    <button onClick={() => deleteRow(id)}>
+                                        <AiOutlineDelete className="text-red-500 font-bold text-xl" />
+                                    </button>
+                                </td>
+                                <td>
+                                    <button onClick={() => editRow(id)}>
+                                        <AiOutlineEdit className="text-green-500 font-bold text-xl" /></button>
+                                </td>
                             </tr>
                         </tbody>
 
                     </React.Fragment>
-
-
-
-
                 ))}
-
-
             </table>
+
+            <div>
+                <h2 className="flex items-end justify-end text-gray-800 text-4xl font-bold">KSHS. {total.toLocaleString()}</h2>
+            </div>
 
         </>
     )
