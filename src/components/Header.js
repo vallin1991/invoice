@@ -11,7 +11,7 @@ export default function Header({ handlePrint }) {
         <div>
           <ul className="flex items-center justify-between flex-wrap">
             <li><button onClick={handlePrint}
-              className="bg-grayblue-500 text-white 
+              className="bg-gray-500 text-white 
              font-bold py-2 px-8 rounded shadow
              border-2 border-gray-500 hover:bg-transparent 
              hover:text-gray-500 transition-all 
