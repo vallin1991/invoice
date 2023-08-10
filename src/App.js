@@ -29,6 +29,7 @@ function App() {
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [amount, setAmount] = useState("");
+  const [list, setList] = useState([]);
 
 //  to handel th priint the button
   const handlePrint = () => {
@@ -53,6 +54,8 @@ function App() {
             quantity={quantity}
             price={price}
             amount={amount}
+            list={list}
+            setList={setList}
             
             />
 
@@ -269,6 +272,8 @@ function App() {
                 setPrice={setPrice}
                 amount={amount}
                 setAmount={setAmount}
+                list={list}
+                setList={setList}
 
                 
                 />
