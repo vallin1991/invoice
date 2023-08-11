@@ -1,7 +1,7 @@
 export default function Footer({ name, email, website, phone, bankAccount, bankName }) {
     return (
         <>
-            <footer className="footer border-t2 border-gray-300 pt-5">
+            <footer className="footer border-t-2 border-gray-300 pt-5">
                 <ul className="flex flex-wrap items-center justify-center">
                     <li>
                         <span className="font-bold">Your name:</span>{name}

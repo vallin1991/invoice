@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Footer from "./components/Footer";
 import ClientDetails from "./components/ClientDetails";
 import Dates from "./components/Dates";
@@ -7,11 +7,11 @@ import MainDetails from "./components/MainDetails";
 import Notes from "./components/Notes";
 import Table from "./components/Table";
 import TableForm from "./components/TableForm";
+import ReactToPrint from "react-to-print";
 
 
 function App() {
   const [showInvoice, setShowInvoice] = useState(true);
-
   const [name, setName] = useState("Thomas Sankara");
   const [address, setAddress] = useState("Nairobi,Kenya");
   const [email, setEmail] = useState("tsbsankara@gmail.com");
@@ -31,6 +31,7 @@ function App() {
   const [amount, setAmount] = useState("");
   const [list, setList] = useState([]);
   const [total, setTotal] = useState(0);
+  const componentRef = useRef();
 
   //  to handel th priint the button
   const handlePrint = () => {
@@ -39,47 +40,57 @@ function App() {
   return (
     <>
       <main className="m-5 p-5 md:max-w-xl md:mx-auto lg-max-w-2xl xl:max-w-4xl bg-white rounded shadow">
+        <ReactToPrint
+          trigger={() => <button className="bg-blue-500 mb-5 text-white 
+        font-bold py-2 px-8 rounded shadow
+        border-2 border-blue-500 hover:bg-transparent 
+        hover:text-blue-500 transition-all 
+        duration-300">Print / Download</button>}
+          content={() => componentRef.current} />
 
         {showInvoice ? (
-          <div>
-            <Header handlePrint={handlePrint} />
+          <>
+            <div ref={componentRef} className="p-5">
+              <Header handlePrint={handlePrint} />
 
-            <MainDetails name={name} address={address} />
+              <MainDetails name={name} address={address} />
 
-            <ClientDetails clientName={clientName} clientAddress={clientAddress} />
+              <ClientDetails clientName={clientName} clientAddress={clientAddress} />
 
-            <Dates invoiceNumber={invoiceNumber} invoiceDate={invoiceDate} dueDate={dueDate} />
+              <Dates invoiceNumber={invoiceNumber} invoiceDate={invoiceDate} dueDate={dueDate} />
 
-            <Table
-              description={description}
-              quantity={quantity}
-              price={price}
-              amount={amount}
-              list={list}
-              setList={setList}
-              total={total}
-              setTotal={setTotal}
+              <Table
+                description={description}
+                quantity={quantity}
+                price={price}
+                amount={amount}
+                list={list}
+                setList={setList}
+                total={total}
+                setTotal={setTotal}
 
-            />
+              />
 
-            <Notes notes={notes} />
+              <Notes notes={notes} />
 
-            <Footer
-              name={name}
-              address={address}
-              website={website}
-              email={email}
-              phone={phone}
-              bankAccount={bankAccount}
-              bankName={bankName}
-
-            />
-            <button onClick={() => setShowInvoice(false)} className="mt-5 bg-blue-500 text-white 
+              <Footer
+                name={name}
+                address={address}
+                website={website}
+                email={email}
+                phone={phone}
+                bankAccount={bankAccount}
+                bankName={bankName}
+              />
+              <button onClick={() => setShowInvoice(false)}
+                className="mt-5 bg-blue-500 text-white 
             font-bold py-2 px-8 rounded shadow
             border-2 border-blue-500 hover:bg-transparent 
             hover:text-blue-500 transition-all 
             duration-300">Edit Information</button>
-          </div>
+            </div>
+          </>
+
         ) : (
           <>
             {/* name, address, email, phone, bank name, bank account number,
@@ -99,7 +110,6 @@ function App() {
                   />
 
                 </div>
-
 
                 <div className="flex flex-col">
 
@@ -162,7 +172,6 @@ function App() {
 
               </article>
 
-
               <article className="md:grid grid-cols-2 gap-10">
                 <div className="flex flex-col">
                   <label htmlFor="bankName">Enter your Bank Name</label>
@@ -218,8 +227,6 @@ function App() {
                     onChange={(e) => setClientAddress(e.target.value)}
                   />
                 </div>
-
-
 
               </article>
               <article className="md:grid grid-cols-3 gap-10 ">
@@ -279,8 +286,6 @@ function App() {
                   setList={setList}
                   total={total}
                   setTotal={setTotal}
-
-
                 />
               </article>
 

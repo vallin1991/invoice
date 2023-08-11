@@ -1,5 +1,3 @@
-
-
 export default function Header({ handlePrint }) {
   return (
     <>
@@ -8,7 +6,7 @@ export default function Header({ handlePrint }) {
           <h1 className="font-bold uppercase tracking-wide text-4xl mb-3">Invoice</h1>
         </div>
 
-        <div>
+        {/* <div>
           <ul className="flex items-center justify-between flex-wrap">
             <li><button onClick={handlePrint}
               className="bg-gray-500 text-white 
@@ -33,7 +31,7 @@ export default function Header({ handlePrint }) {
             hover:text-green-500 transition-all 
             duration-300">Send</button></li>
           </ul>
-        </div>
+        </div> */}
       </header>
     </>
   )

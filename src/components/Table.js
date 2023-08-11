@@ -16,7 +16,7 @@ export default function Table({ list, total }) {
         {list.map(({ id, description, quantity, price, amount }) => (
           <React.Fragment key={id}>
 
-            <tbody>
+            <tbody >
               <tr>
                 <td>{description}</td>
                 <td>{quantity}</td>
@@ -24,17 +24,13 @@ export default function Table({ list, total }) {
                 <td>{amount}</td>
               </tr>
             </tbody>
-
           </React.Fragment>
-
         ))}
-
-
       </table>
 
       <div>
-                <h2 className="flex items-end justify-end text-gray-800 text-4xl font-bold">KSHS. {total.toLocaleString()}</h2>
-            </div>
+        <h2 className="flex items-end justify-end text-gray-800 text-4xl font-bold">KSHS. {total.toLocaleString()}</h2>
+      </div>
 
     </>
   )
